@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  p Rows: #{query.rows}
+  p Columns: #{query.cols}
+    - var rows = Number(query.rows)
+    - var col = Number(query.cols)
+    - for(let r=0; r<parseInt(rows, 10); r++) 
+      x = document.getElementById().insertRow(rows);
+      - for(c=0; c<parseInt(col, 10); c++) 
+        y = x.insertCell(c);
+        y.innerHTML= row + col * col
