@@ -53,6 +53,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var guitarRouter = require('./routes/guitar');
 var addmodsRouter = require('./routes/addmods');
+var resourceRouter = require('./routes/resource');
 const { start } = require('repl');
 
 var app = express();
@@ -71,6 +72,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/guitar', guitarRouter);
 app.use('/addmods', addmodsRouter)
+app.use('/resource', resourceRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
