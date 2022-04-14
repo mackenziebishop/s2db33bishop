@@ -4,10 +4,56 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const connectionString = process.env.MONGO_CON;
+var mongoose = require('mongoose');
+mongoose.connect(connectionString, {useNewUrlParser: true,
+  useUnifiedTopology: true});
+
+//Get default connection
+var db = mongoose.connection;
+
+//Bind connection to error event
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once("open", function(){
+  console.log("Connection to DB succeeded")
+});
+
+var Guitar = require("./models/guitarSchema.js");
+
+//Seed the collection (if needed) on server start
+ async function recreateDB(){
+   //Delete everything
+   await Guitar.deleteMany();
+
+   let instance1 = new Guitar({guitar_type:"Acoustic", size:'Full', price: 150});
+   instance1.save(function(err,doc){
+     if(err) return console.error(err);
+     console.log("First object saved")
+   });
+
+   let instance2 = new Guitar({guitar_type:"Electric", size: 'Full', price: 400});
+   instance2.save(function(err,doc){
+     if(err) return console.error(err);
+     console.log("Second object saved")
+   });
+
+   let instance3 = new Guitar({guitar_type:"Acoustic", size: '3/4', price: 80});
+   instance3.save(function(err,doc){
+     if (err) return console.error(err);
+     console.log("Third object saved")
+   });
+ }
+
+ let reseed = true;
+ if (reseed){
+   recreateDB();
+ }
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var guitarRouter = require('./routes/guitar');
 var addmodsRouter = require('./routes/addmods');
+const { start } = require('repl');
 
 var app = express();
 
