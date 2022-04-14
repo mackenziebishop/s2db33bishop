@@ -6,7 +6,7 @@ var Guitar = require('../models/guitarSchema');
 exports.guitar_list = async function(req, res){
     try{
         theGuitars = await Guitar.find();
-        res.send(theGuitar);
+        res.send(theGuitars);
     }
     catch(err){
         res.status(500);

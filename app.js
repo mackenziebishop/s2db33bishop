@@ -18,7 +18,7 @@ db.once("open", function(){
   console.log("Connection to DB succeeded")
 });
 
-var Guitar = require("./models/guitarSchema.js");
+var Guitar = require("./models/guitarSchema");
 
 //Seed the collection (if needed) on server start
  async function recreateDB(){
@@ -37,7 +37,7 @@ var Guitar = require("./models/guitarSchema.js");
      console.log("Second object saved")
    });
 
-   let instance3 = new Guitar({guitar_type:"Acoustic", size: '3/4', price: 80});
+   let instance3 = new Guitar({guitar_type:"Acoustic", size: 'Full', price: 80});
    instance3.save(function(err,doc){
      if (err) return console.error(err);
      console.log("Third object saved")
