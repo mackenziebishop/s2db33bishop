@@ -3,8 +3,15 @@ const res = require('express/lib/response');
 var Guitar = require('../models/guitarSchema');
 
 //List of all guitars
-exports.guitar_list = function(req, res){
-    res.send('NOT IMPLEMENTED: Guitar list');
+exports.guitar_list = async function(req, res){
+    try{
+        theGuitars = await Guitar.find();
+        res.send(theGuitar);
+    }
+    catch(err){
+        res.status(500);
+        res.send(`{"error":${err}}`);
+    }
 };
 
 //For a specific guitar
