@@ -18,7 +18,7 @@ exports.guitar_detail = function(req, res){
 };
 
 //Handle Guitar create on POST
-exports.guitar_create_post = function(req, res){
+exports.guitar_create_post = async function(req, res){
     console.log(req.body)
     let document = new Guitar();
     // We are looking for a body, since POST does not have query parameters.
