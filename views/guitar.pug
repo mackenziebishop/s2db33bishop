@@ -2,9 +2,11 @@ extends layout
 
 block content
   h1= title 
-  - var results = ["Acoustic", "Full", "150"];
-  div(class="container-fluid")
-    div(class="row")
-    -
-    each item in results
-      div(col-sm-2) #{item}
+  //- - var results = ["Acoustic", "Full", "150"];
+  //- div(class="container-fluid")
+  //-   div(class="row")
+  //-   -
+  //-   each item in results
+  //-     div(col-sm-2) #{item}
+
+  -let items = results
