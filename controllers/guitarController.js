@@ -1,3 +1,4 @@
+const { update } = require('../models/guitarSchema');
 var Guitar = require('../models/guitarSchema');
 
 //List of all Guitars
@@ -13,8 +14,16 @@ exports.guitar_list = async function(req, res) {
 };
 
 //For a specific Guitar
-exports.guitar_detail = function(req, res){
-    res.send('NOT IMPLEMENTED: Guitar detail: ' + req.params.id);
+exports.guitar_detail = async function(req, res){
+    console.log("detail" + req.params.id)
+    try{
+        result = await Guitar.findById(req.params.id)
+        res.send(results)
+    }
+    catch(error){
+        res.status(500)
+        res.send(`{"error": document for id ${req.params.id} not found}`);
+    }
 };
 
 //Handle Guitar create on POST
@@ -43,8 +52,28 @@ exports.guitar_delete = function(req, res){
 };
 
 //Handle Guitar update form on PUT
-exports.guitar_update_put = function(req, res){
-    res.send('NOT IMPLEMENTED: Guitar update PUT' + req.params.id);
+exports.guitar_update_put = async function(req, res){
+    console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`)
+    try{
+        let toUpdate = await Guitar.findById(req.params.id)
+        //Do updates of properties
+        if (req.body.guitar_type){
+            toUpdate.guitar_type = req.body.guitar_type;
+        }
+        if (req.body.size){
+            toUpdate.size = req.body.size;
+        }
+        if (req.body.price){
+            toUpdate.price = req.body.price;
+        }
+        let result = await toUpdate.save();
+        console.log("Success " + result)
+        res.send(result)
+    }
+    catch(err){
+        res.status(500)
+        res.send(`{"error": ${err}: Update for id ${req.params.id} failed}`);
+    }
 };
 
 //VIEWS
