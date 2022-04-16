@@ -14,3 +14,6 @@ router.get('/create', guitar_controllers.guitar_create_Page);
 
 /*GET create update page*/
 router.get('/update', guitar_controllers.guitar_update_Page);
+
+/*GET delete guitar page*/
+router.get('/delete', guitar_controllers.guitar_delete_Page);
