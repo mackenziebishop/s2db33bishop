@@ -100,10 +100,24 @@ exports.guitar_view_all_Page = async function(req, res) {
 
 //Handle a show one view with id specified by query
 exports.guitar_view_one_Page = async function(req, res){
-    console.log("Single view for id" + req.query.id)
+    console.log("Single view for id " + req.query.id)
     try{
         result = await Guitar.findById(req.query.id)
         res.render('guitardetail', {title: 'Guitar Detail', toShow: result});
+    }
+    catch(err){
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+
+//Handle building the view for creating a guitar
+//No body, no in path parameter, no query
+//Does not need to be async
+exports.guitar_create_Page = function(req, res){
+    console.log("create view")
+    try{
+        res.render('guitarcreate', {title: 'Guitar Create'});
     }
     catch(err){
         res.status(500)
