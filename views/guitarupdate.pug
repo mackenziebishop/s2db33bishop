@@ -1,0 +1,43 @@
+extends layout
+
+block content
+ h1= title
+
+ - let guitar_id = toShow._id
+ - let guitar_type = toShow.guitar_type
+ - let guitar_size = toShow.size 
+ - let guitar_price = toShow.price 
+
+ div.row(class='mb-2')
+  div.mr-1 ID is 
+  div #{guitar_id}
+ - let action_id = "/resource/guitarController/" + guitar_id
+ form(id='GuitarForm', action = action_id, method = "PUT")
+  div.form-group
+   label.guitarAttr(for='guitar_type') Guitar type
+   input#guitar_type(type='text', name='guitar_type', value = guitar_type)
+  div.form-group
+   label.guitarAttr(for='size') Guitar size
+   input#size(type='text', name='size', value = guitar_size)
+  div.form-group
+   label.guitarAttr(for='price') Guitar price
+   input#price(type='number', name='price', value = guitar_price)
+  input(type="submit")
+
+ script.
+  document.forms['GuitarForm'].addEventListener('submit', (event) => {
+   event.preventDefault();
+   // TODO do something here to show user that form is being submitted
+   fetch(event.target.action, {
+    method: 'PUT',
+    body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+   }).then((resp) => {
+    return resp.json(); // or resp.text() or whatever the server sends
+   }).then((body) => {
+    alert("Update succeded")
+    // TODO handle body
+   }).catch((error) => {
+    // TODO handle error
+    alert("Update failed " + error )
+   });
+  });

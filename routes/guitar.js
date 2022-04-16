@@ -11,3 +11,6 @@ router.get('/detail', guitar_controllers.guitar_view_one_Page);
 
 /*GET create costume page*/
 router.get('/create', guitar_controllers.guitar_create_Page);
+
+/*GET create update page*/
+router.get('/update', guitar_controllers.guitar_update_Page);
