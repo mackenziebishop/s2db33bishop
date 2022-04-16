@@ -7,14 +7,7 @@ a {
   color: #00B7FF;
 }
 
-/* .btn {
-  background-color: green;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 20px;
-} */
-
+.guitarAttr{
+  background-color: goldenrod;
+  width: 120px;
+}

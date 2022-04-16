@@ -47,8 +47,17 @@ exports.guitar_create_post = async function(req, res){
 };
 
 //Handle Guitar delete form on DELETE
-exports.guitar_delete = function(req, res){
-    res.send('NOT IMPLEMENTED: Guitar delete DELETE ' + req.params.id);
+exports.guitar_delete = async function(req, res){
+    console.log("delete" + req.params.id)
+    try{
+        result = await Guitar.findByIdAndDelete(req.params.id)
+        console.log("Removed" + result)
+        res.send(result)
+    }
+    catch(err){
+        res.status(500)
+        res.send(`"error": Error deleteing ${err}`);
+    }
 };
 
 //Handle Guitar update form on PUT
@@ -87,5 +96,18 @@ exports.guitar_view_all_Page = async function(req, res) {
         res.status(500);
         res.send(`{"error": ${err}}`);
     }
-   };
+};
+
+//Handle a show one view with id specified by query
+exports.guitar_view_one_Page = async function(req, res){
+    console.log("Single view for id" + req.query.id)
+    try{
+        result = await Guitar.findById(req.query.id)
+        res.render('guitardetail', {title: 'Guitar Detail', toShow: result});
+    }
+    catch(err){
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
    
