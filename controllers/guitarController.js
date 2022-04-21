@@ -90,7 +90,7 @@ exports.guitar_update_put = async function(req, res){
 exports.guitar_view_all_Page = async function(req, res) {
     try{
         theGuitars = await Guitar.find();
-        res.render('guitars', { title: 'Guitar Search Results', results: theGuitars });
+        res.render('guitar', { title: 'Guitar Search Results', results: theGuitars });
     }
     catch(err){
         res.status(500);
