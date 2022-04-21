@@ -51,7 +51,7 @@ var Guitar = require("./models/guitarSchema");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var guitarRouter = require('./routes/guitars');
+var guitarRouter = require('./routes/guitar');
 var addmodsRouter = require('./routes/addmods');
 var resourceRouter = require('./routes/resource');
 const { start } = require('repl');
@@ -70,7 +70,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/guitars', guitarRouter);
+app.use('/guitar', guitarRouter);
 app.use('/addmods', addmodsRouter)
 app.use('/resource', resourceRouter);
 
