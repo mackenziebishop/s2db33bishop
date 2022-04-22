@@ -1,15 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to Assignment #10
-  button(type="button", onclick="moreClaps()",class="btn btn-secondary") Push Me
-  div(id="target") Clap for Me
-    script.
-      var clap_count = 0;
-      function moreClaps(){
-        //document.getElementById("btn btn-secondary").innerHTML = counter.toString();
-        clap_count+=2;
-        return document.getElementById("target").innerHTML = `Clap ${clap_count} times`;
-      }
-  a(href="/guitar") Guitar Link
+ if (!user)
+  a(href="/login") Login
+  br
+  a(href="/register") Register
+ if (user)
+  p You are currently logged in as #{user.username}
+  a(href="/guitar") Take me to guitar
+  br
+  a(href="/logout") Logout
