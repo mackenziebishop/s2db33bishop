@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-//R3quire controller modules
+//Require controller modules
 var api_controller = require('../controllers/api');
 var guitar_controller = require('../controllers/guitarController');
 
